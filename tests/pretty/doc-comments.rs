@@ -85,3 +85,9 @@ enum SomeEnum {
     // this non-doc comment must stay after the outer-docs
     Variant,
 }
+
+fn stmts() {
+    #[allow(unused)]
+    // this non-doc comment must stay after the attribute
+    let x = 5;
+}
