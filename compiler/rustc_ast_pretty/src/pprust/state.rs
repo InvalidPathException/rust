@@ -1514,7 +1514,9 @@ impl<'a> State<'a> {
     }
 
     fn print_stmt(&mut self, st: &ast::Stmt) {
-        self.maybe_print_comment(st.span.lo());
+        if !matches!(st.kind, ast::StmtKind::Item(_)) {
+            self.maybe_print_comment(st.span.lo());
+        }
         match &st.kind {
             ast::StmtKind::Let(loc) => {
                 self.print_outer_attributes(&loc.attrs);

@@ -290,8 +290,8 @@ mod expressions {
     /// ExprKind::Ret
     fn expr_ret() { return; return true; }
 
-
     /// ExprKind::InlineAsm: see exhaustive-asm.rs
+
     /// ExprKind::OffsetOf
     fn expr_offset_of() {
 

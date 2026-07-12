@@ -30,8 +30,8 @@ impl<'a> State<'a> {
         let ast::Item { id, span, ref attrs, ref kind, ref vis, tokens: _ } = *item;
         self.ann.pre(self, AnnNode::SubItem(id));
         self.hardbreak_if_not_bol();
-        self.maybe_print_comment(span.lo());
         self.print_outer_attributes(attrs);
+        self.maybe_print_comment(span.lo());
         match kind {
             ast::ForeignItemKind::Fn(func) => {
                 self.print_fn_full(vis, attrs, &*func);
@@ -167,8 +167,8 @@ impl<'a> State<'a> {
             return;
         }
         self.hardbreak_if_not_bol();
-        self.maybe_print_comment(item.span.lo());
         self.print_outer_attributes(&item.attrs);
+        self.maybe_print_comment(item.span.lo());
         self.ann.pre(self, AnnNode::Item(item));
         match &item.kind {
             ast::ItemKind::ExternCrate(orig_name, ident) => {
@@ -548,8 +548,8 @@ impl<'a> State<'a> {
                 if let ast::VariantData::Tuple(..) = struct_def {
                     self.popen();
                     self.commasep(Inconsistent, struct_def.fields(), |s, field| {
-                        s.maybe_print_comment(field.span.lo());
                         s.print_outer_attributes(&field.attrs);
+                        s.maybe_print_comment(field.span.lo());
                         s.print_visibility(&field.vis);
                         s.print_mut_restriction(&field.mut_restriction);
                         s.print_type(&field.ty)
@@ -574,8 +574,8 @@ impl<'a> State<'a> {
 
                     for field in fields {
                         self.hardbreak_if_not_bol();
-                        self.maybe_print_comment(field.span.lo());
                         self.print_outer_attributes(&field.attrs);
+                        self.maybe_print_comment(field.span.lo());
                         self.print_visibility(&field.vis);
                         self.print_mut_restriction(&field.mut_restriction);
                         self.print_ident(field.ident.unwrap());
@@ -606,8 +606,8 @@ impl<'a> State<'a> {
         let ast::Item { id, span, ref attrs, ref kind, ref vis, tokens: _ } = *item;
         self.ann.pre(self, AnnNode::SubItem(id));
         self.hardbreak_if_not_bol();
-        self.maybe_print_comment(span.lo());
         self.print_outer_attributes(attrs);
+        self.maybe_print_comment(span.lo());
         match kind {
             ast::AssocItemKind::Fn(func) => {
                 self.print_fn_full(vis, attrs, &*func);
