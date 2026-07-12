@@ -1514,12 +1514,13 @@ impl<'a> State<'a> {
     }
 
     fn print_stmt(&mut self, st: &ast::Stmt) {
-        if !matches!(st.kind, ast::StmtKind::Item(_)) {
+        if !matches!(st.kind, ast::StmtKind::Item(_) | ast::StmtKind::Let(_)) {
             self.maybe_print_comment(st.span.lo());
         }
         match &st.kind {
             ast::StmtKind::Let(loc) => {
                 self.print_outer_attributes(&loc.attrs);
+                self.maybe_print_comment(st.span.lo());
                 self.space_if_not_bol();
                 let ib1 = self.ibox(INDENT_UNIT);
                 if loc.super_.is_some() {
