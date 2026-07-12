@@ -51,3 +51,31 @@ fn g() {}
 fn h() {
     #![doc = "as do inner ones"]
 }
+
+/// outer-docs followed by a non-doc comment
+// this non-doc comment must stay after the outer-docs
+fn i() {}
+
+struct SomeStruct {
+    /// field outer-docs followed by a non-doc comment
+    // this non-doc comment must stay after the outer-docs
+    some_field: u8,
+}
+
+trait SomeTrait {
+    /// associated-item outer-docs followed by a non-doc comment
+    // this non-doc comment must stay after the outer-docs
+    fn some_method();
+}
+
+extern "C" {
+    /// foreign-item outer-docs followed by a non-doc comment
+    // this non-doc comment must stay after the outer-docs
+    fn some_fn();
+}
+
+fn outer() {
+    /// nested-item outer-docs followed by a non-doc comment
+    // this non-doc comment must stay after the outer-docs
+    fn inner() {}
+}
