@@ -907,8 +907,8 @@ impl<'a> State<'a> {
         }
         let cb = self.cbox(INDENT_UNIT);
         let ib = self.ibox(0);
-        self.maybe_print_comment(arm.pat.span.lo());
         self.print_outer_attributes(&arm.attrs);
+        self.maybe_print_comment(arm.pat.span.lo());
         self.print_pat(&arm.pat);
         self.space();
         if let Some(guard) = &arm.guard {
