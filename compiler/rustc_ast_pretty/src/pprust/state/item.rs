@@ -469,9 +469,13 @@ impl<'a> State<'a> {
         self.space();
         self.bopen(ib);
         for v in enum_definition.variants.iter() {
-            self.space_if_not_bol();
-            self.maybe_print_comment(v.span.lo());
+            if v.attrs.is_empty() {
+                self.space_if_not_bol();
+            } else {
+                self.hardbreak_if_not_bol();
+            }
             self.print_outer_attributes(&v.attrs);
+            self.maybe_print_comment(v.span.lo());
             let ib = self.ibox(0);
             self.print_variant(v);
             self.word(",");
