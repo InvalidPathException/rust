@@ -1514,7 +1514,13 @@ impl<'a> State<'a> {
     }
 
     fn print_stmt(&mut self, st: &ast::Stmt) {
-        if !matches!(st.kind, ast::StmtKind::Item(_) | ast::StmtKind::Let(_)) {
+        if !matches!(
+            st.kind,
+            ast::StmtKind::Item(_)
+                | ast::StmtKind::Let(_)
+                | ast::StmtKind::Expr(_)
+                | ast::StmtKind::Semi(_)
+        ) {
             self.maybe_print_comment(st.span.lo());
         }
         match &st.kind {

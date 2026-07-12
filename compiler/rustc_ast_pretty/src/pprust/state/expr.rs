@@ -389,14 +389,16 @@ impl<'a> State<'a> {
         is_inline: bool,
         mut fixup: FixupContext,
     ) {
-        self.maybe_print_comment(expr.span.lo());
-
+        if let Some(attr) = expr.attrs.first() {
+            self.maybe_print_comment(attr.span.lo());
+        }
         let attrs = &expr.attrs;
         if is_inline {
             self.print_outer_attributes_inline(attrs);
         } else {
             self.print_outer_attributes(attrs);
         }
+        self.maybe_print_comment(expr.span.lo());
 
         let ib = self.ibox(INDENT_UNIT);
 
