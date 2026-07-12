@@ -79,3 +79,9 @@ fn outer() {
     // this non-doc comment must stay after the outer-docs
     fn inner() {}
 }
+
+enum SomeEnum {
+    /// variant outer-docs followed by a non-doc comment
+    // this non-doc comment must stay after the outer-docs
+    Variant,
+}
